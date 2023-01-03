@@ -29,16 +29,8 @@ async def on_message(message):
                 print(str(spells_request))
                 json_to_text = spells_request.json()
                 data = pd.DataFrame(pd.json_normalize(json_to_text))
-                # serialize_check = serialize_object(json_to_text)
-                # print(serialize_check)
-                # serialize_check['concentration'] = 'No'
-                # serialize_check['ritual'] = 'No'
-                # data_check = pd.DataFrame.from_dict(serialize_check, orient='index')
-                # print(data_check)
-                # print(data.info)
                 joined_desc = ''
                 joined_desc.join(data['desc'][0:].astype(str))
-                #joined_desc.replace("\"", '')
                 print(joined_desc)
                 if 'material' in data.columns:
                     show_to_player = (f'{data["name"][0]}'
@@ -112,7 +104,7 @@ async def on_message(message):
             #         await message.channel.send("Wow thats a big spell! Discord can't fit all of that.")
             #     return
             # except:
-                await message.channel.send("Stephen hasn't implemented classes yet, because they're weird as fuuuuuck dude. Try a spell or a features!")
+                await message.channel.send("Stephen hasn't implemented classes yet, please check back alter. Try a spell or a feature!")
         ###features functionality needs: exploded lists for any nested columns, as well as a quick write up about what the 'quick reference' info would need.
         ##### PAY ATTENTION TO THE COLUMNS. featuress are messy, fickle, and wildly different. It could be rough. #####
         if 'features' in input:
@@ -139,7 +131,7 @@ async def on_message(message):
                 elif len(show_to_player) < 2000:
                     await message.channel.send(show_to_player)
                 else:
-                    await message.channel.send("Wow thats a big features! Discord can't fit all of that.")
+                    await message.channel.send("Wow thats a big feature! Discord can't fit all of that.")
                 return
             except:
                 await message.channel.send("Hmmm. I couldn't find that feature. Are you sure its spelled right?")
@@ -176,22 +168,9 @@ async def on_message(message):
         if 'spell:' in input:
             try:
                 input = format_the_request.replace('spell: ', '').replace(' ', '-')
-                print(input)
                 spells_request = requests.get(f'https://www.dnd5eapi.co/api/spells/{input}')
-                print(str(spells_request))
                 json_to_text = spells_request.json()
                 data = pd.DataFrame(pd.json_normalize(json_to_text))
-                # serialize_check = serialize_object(json_to_text)
-                # print(serialize_check)
-                # serialize_check['concentration'] = 'No'
-                # serialize_check['ritual'] = 'No'
-                # data_check = pd.DataFrame.from_dict(serialize_check, orient='index')
-                # print(data_check)
-                # print(data.info)
-                joined_desc = ''
-                joined_desc.join(data['desc'][0:].astype(str))
-                #joined_desc.replace("\"", '')
-                print(joined_desc)
                 if 'material' in data.columns:
                     show_to_player = (f'{data["name"][0]}'
                                         f'\nDescription: '
@@ -213,7 +192,6 @@ async def on_message(message):
                                         f'\nConcentration: {data["concentration"][0]}'
                                         f'\nRitual: {data["ritual"][0]}'
                                         f'\n{data["casting_time"][0]}')
-                print(show_to_player)
                 await message.channel.send(f'Here you, go {username}!')
                 if len(show_to_player) >= 2000 and len(show_to_player) < 4000:
                     await message.channel.send(show_to_player[0:len(show_to_player)//2])
@@ -226,6 +204,7 @@ async def on_message(message):
             except:
                 await message.channel.send("Hmmm. I couldn't find that spell. Are you sure its spelled right?")
         if 'class' in input:
+            ###Needs some major work to make functional###
             # try:
             #     input=str(format_the_request).replace('class: ', '')
             #     #print(input)
@@ -263,7 +242,7 @@ async def on_message(message):
             #         await message.channel.send("Wow thats a big spell! Discord can't fit all of that.")
             #     return
             # except:
-                await message.channel.send("Stephen hasn't implemented classes yet, because they're weird as fuuuuuck dude. Try a spell or a features!")
+                await message.channel.send("Stephen hasn't implemented classes yet, please check back later. Try a spell or a class feature!")
         ###features functionality needs: exploded lists for any nested columns, as well as a quick write up about what the 'quick reference' info would need.
         ##### PAY ATTENTION TO THE COLUMNS. featuress are messy, fickle, and wildly different. It could be rough. #####
         if 'features' in input:
@@ -290,7 +269,7 @@ async def on_message(message):
                 elif len(show_to_player) < 2000:
                     await message.channel.send(show_to_player)
                 else:
-                    await message.channel.send("Wow thats a big features! Discord can't fit all of that.")
+                    await message.channel.send("Wow thats a big feature! Discord can't fit all of that.")
                 return
             except:
                 await message.channel.send("Hmmm. I couldn't find that feature. Are you sure its spelled right?")
@@ -321,7 +300,8 @@ async def on_message(message):
                     await message.channel.send("Wow thats a big features! Discord can't fit all of that.")
                 return
             except:
-                await message.channel.send("Hmmm. I couldn't find that feature. Are you sure its spelled right?")
+                await message.channel.send("**Currently the API only lists grappler as a possible feat.**")
+                #await message.channel.send("Hmmm. I couldn't find that feature. Are you sure its spelled right? **NOTE**")
 try:
     client.run(token)
 except:
