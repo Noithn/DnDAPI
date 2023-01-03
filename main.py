@@ -2,7 +2,7 @@ import requests, discord, os
 from zeep.helpers import serialize_object
 from dotenv import load_dotenv
 import pandas as pd
-load_dotenv(dotenv_path='.gitignore/.env')
+load_dotenv(dotenv_path='.env')
 intents = discord.Intents.default()
 intents.message_content = True
 client = discord.Bot(intents=intents)
