@@ -111,6 +111,17 @@ async def on_message(message):
                                             f'\nConcentration: {data["concentration"][0]}'
                                             f'\nRitual: {data["ritual"][0]}'
                                             f'\n{data["casting_time"][0]}')
+                    if 'higher_level' in data.columns:
+                        show_to_player = (f'{data["name"][0]}'
+                                            f'\nDescription: '
+                                            f'\n{(data["desc"][0])}'
+                                            f'\nRange: {data["range"][0]}'
+                                            f'\nComponents: {data["components"][0]}'
+                                            f'\nHigher Levels: {data["higher_level"][0]}'
+                                            f'\nDuration: {data["duration"][0]}'
+                                            f'\nConcentration: {data["concentration"][0]}'
+                                            f'\nRitual: {data["ritual"][0]}'
+                                            f'\n{data["casting_time"][0]}')
                     else:
                         show_to_player = (f'{data["name"][0]}'
                                             f'\nDescription: '
